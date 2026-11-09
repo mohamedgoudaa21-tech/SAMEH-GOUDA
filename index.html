@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روابط التواصل والخدمات</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        instapay: '#5F259F',
+                        whatsapp: '#25D366',
+                        facebook: '#1877F2',
+                        maps: '#EA4335',
+                        reviews: '#FBBC05',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts (Tajawal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        /* Custom smooth hover animations */
+        .link-card {
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .link-card:hover {
+            transform: translateY(-3px);
+        }
+        /* Glassmorphism background */
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col items-center justify-between transition-colors duration-300 p-4 sm:p-6 relative pb-28">
+
+    <!-- Top Action Buttons (Theme Toggle & Direct Copy Share) -->
+    <header class="w-full max-w-md flex justify-between items-center mb-6 pt-2">
+        <button id="themeToggle" class="p-3 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 shadow-sm hover:shadow border border-slate-200 dark:border-slate-700/60 transition-all flex items-center justify-center w-11 h-11" title="تبديل الوضع">
+            <i class="fa-solid font-bold text-lg" id="themeIcon"></i>
+        </button>
+
+        <div class="flex gap-2">
+            <button onclick="callDirectly()" class="px-3.5 py-2 text-xs font-bold rounded-full bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-300 dark:hover:bg-slate-700 transition flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-phone text-emerald-500"></i>
+                <span>اتصال مباشر</span>
+            </button>
+            <button onclick="copyShareUrl()" class="p-3 rounded-full bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 shadow-sm hover:shadow border border-slate-200 dark:border-slate-700/60 transition flex items-center justify-center w-11 h-11" title="نسخ رابط الصفحة">
+                <i class="fa-solid fa-copy text-indigo-500"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-md flex flex-col items-center flex-grow">
+        
+        <!-- Profile Card -->
+        <div class="text-center w-full mb-8 flex flex-col items-center">
+            <div class="relative mb-4">
+                <div class="absolute -inset-1 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 rounded-full blur-md opacity-60"></div>
+                <img id="displayAvatar" src="https://placehold.co/150x150/4f46e5/ffffff?text=شعارك" alt="البروفايل" class="relative rounded-full w-28 h-28 object-cover border-4 border-white dark:border-slate-900 shadow-md">
+            </div>
+            
+            <h1 id="displayName" class="text-2xl font-extrabold tracking-wide mb-1 text-slate-900 dark:text-white">اسم النشاط أو الشخص</h1>
+            <p id="displayBio" class="text-sm text-slate-600 dark:text-slate-400 max-w-xs leading-relaxed font-medium">أهلاً بك! اضغط على أي أيقونة للتواصل أو تصفح منصاتنا وموقعنا.</p>
+        </div>
+
+        <!-- Icons Grid (الشبكة الرئيسية للأيقونات) -->
+        <div class="w-full grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+
+            <!-- Facebook Icon Card -->
+            <a id="linkFacebook" href="https://facebook.com" target="_blank" class="link-card flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-blue-500/50 group transition">
+                <div class="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-600 flex items-center justify-center text-2xl font-bold mb-2 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-sm">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </div>
+                <span class="font-bold text-sm text-slate-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">فيسبوك</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Facebook</span>
+            </a>
+
+            <!-- WhatsApp Icon Card -->
+            <a id="linkWhatsapp" href="https://wa.me/201000000000" target="_blank" class="link-card flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-emerald-500/50 group transition">
+                <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-2xl font-bold mb-2 group-hover:bg-emerald-500 group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-sm">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <span class="font-bold text-sm text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">واتساب</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">WhatsApp</span>
+            </a>
+
+            <!-- InstaPay Icon Card -->
+            <button onclick="toggleInstaPayModal()" class="link-card flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-purple-500/50 group transition">
+                <div class="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 text-purple-600 dark:text-purple-400 flex items-center justify-center p-2.5 mb-2 group-hover:scale-110 transition-all duration-300 shadow-sm border border-slate-200/60 dark:border-slate-700/60">
+                    <!-- InstaPay Official Logo Vector SVG -->
+                    <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 45L22 25H32L25 45H15Z" fill="#5E2590"/>
+                        <path d="M26 15C26 17.7614 23.7614 20 21 20C18.2386 20 16 17.7614 16 15C16 12.2386 18.2386 10 21 10C23.7614 10 26 12.2386 26 15Z" fill="#5E2590"/>
+                        <path d="M30 45L40 25H48L38 45H30Z" fill="#E86E53"/>
+                        <path d="M42 45L52 25H60L50 45H42Z" fill="#E86E53"/>
+                        <path d="M52 45L59 25H80C86 25 89 28 87 34C85 40 80 45 73 45H52ZM69 33C71.5 33 73.5 31.5 74 30C74.5 28.5 73.5 27.5 71 27.5H65L63 33H69Z" fill="#5E2590"/>
+                        <text x="50" y="68" font-family="Arial, sans-serif" font-weight="900" font-style="italic" font-size="14" fill="#5E2590" text-anchor="middle" letter-spacing="0.5">INSTAPAY</text>
+                    </svg>
+                </div>
+                <span class="font-bold text-sm text-slate-800 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">إنستا باي</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">InstaPay</span>
+            </button>
+
+            <!-- Google Maps Icon Card -->
+            <a id="linkMaps" href="https://maps.google.com" target="_blank" class="link-card flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-rose-500/50 group transition">
+                <div class="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-2.5 mb-2 group-hover:scale-110 transition-all duration-300 shadow-sm border border-slate-200/60 dark:border-slate-700/60">
+                    <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gmapsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#EA4335" />
+                                <stop offset="30%" stop-color="#FBBC04" />
+                                <stop offset="65%" stop-color="#34A853" />
+                                <stop offset="100%" stop-color="#4285F4" />
+                            </linearGradient>
+                        </defs>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M50 10C30.67 10 15 25.67 15 45C15 67.5 44 91 47.7 93.9C49.05 94.97 50.95 94.97 52.3 93.9C56 91 85 67.5 85 45C85 25.67 69.33 10 50 10ZM50 57.5C43.0964 57.5 37.5 51.9036 37.5 45C37.5 38.0964 43.0964 32.5 50 32.5C56.9036 32.5 62.5 38.0964 62.5 45C62.5 51.9036 56.9036 57.5 50 57.5Z" fill="url(#gmapsGrad)"/>
+                    </svg>
+                </div>
+                <span class="font-bold text-sm text-slate-800 dark:text-slate-100 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">جوجل ماب</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Google Maps</span>
+            </a>
+
+            <!-- Google Reviews Icon Card -->
+            <a id="linkReviews" href="https://search.google.com/local/writereview" target="_blank" class="link-card flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-amber-500/50 group transition">
+                <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-2xl font-bold mb-2 group-hover:bg-amber-500 group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-sm">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <span class="font-bold text-sm text-slate-800 dark:text-slate-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">تقييم جوجل</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Google Reviews</span>
+            </a>
+
+            <!-- Google Search / Website Icon Card -->
+            <a id="linkGoogle" href="https://google.com" target="_blank" class="link-card flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-blue-500/50 group transition">
+                <div class="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-2.5 mb-2 group-hover:scale-110 transition-all duration-300 shadow-sm border border-slate-200/60 dark:border-slate-700/60">
+                    <svg class="w-full h-full" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                    </svg>
+                </div>
+                <span class="font-bold text-sm text-slate-800 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">جوجل</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Google</span>
+            </a>
+
+        </div>
+
+        <!-- InstaPay Modal / Popup -->
+        <div id="instapayModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
+            <div class="rounded-3xl bg-gradient-to-br from-purple-900 via-indigo-900 to-slate-900 text-white p-6 shadow-2xl border border-purple-500/30 max-w-sm w-full relative">
+                <button onclick="toggleInstaPayModal()" class="absolute top-4 left-4 text-purple-300 hover:text-white w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-white p-2 flex items-center justify-center text-purple-300 font-extrabold text-xl shadow">
+                        <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 45L22 25H32L25 45H15Z" fill="#5E2590"/>
+                            <path d="M26 15C26 17.7614 23.7614 20 21 20C18.2386 20 16 17.7614 16 15C16 12.2386 18.2386 10 21 10C23.7614 10 26 12.2386 26 15Z" fill="#5E2590"/>
+                            <path d="M30 45L40 25H48L38 45H30Z" fill="#E86E53"/>
+                            <path d="M42 45L52 25H60L50 45H42Z" fill="#E86E53"/>
+                            <path d="M52 45L59 25H80C86 25 89 28 87 34C85 40 80 45 73 45H52ZM69 33C71.5 33 73.5 31.5 74 30C74.5 28.5 73.5 27.5 71 27.5H65L63 33H69Z" fill="#5E2590"/>
+                            <text x="50" y="68" font-family="Arial, sans-serif" font-weight="900" font-style="italic" font-size="14" fill="#5E2590" text-anchor="middle" letter-spacing="0.5">INSTAPAY</text>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-bold text-white text-lg block leading-tight">الدفع عبر إنستا باي</span>
+                        <span class="text-xs text-purple-200">InstaPay Payment</span>
+                    </div>
+                </div>
+
+                <div class="bg-black/30 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between mb-4">
+                    <div class="overflow-hidden">
+                        <span class="text-[11px] text-purple-300 block">عنوان الدفع / الحساب:</span>
+                        <span id="instapayAddressText" class="font-mono text-sm font-bold text-purple-100 truncate block">username@instapay</span>
+                    </div>
+                    <button onclick="copyInstaPay()" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition flex items-center gap-1.5 shrink-0">
+                        <i class="fa-regular fa-copy"></i>
+                        <span id="copyBtnText">نسخ</span>
+                    </button>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl flex flex-col items-center justify-center mb-4">
+                    <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=username@instapay" alt="InstaPay QR Code" class="w-40 h-40">
+                    <span class="text-xs text-slate-600 font-bold mt-2">امسح الرمز أعلاه لتحويل المبلغ</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-xs text-slate-500 dark:text-slate-400 font-medium">
+        <p>© <span id="currentYear"></span> جميع الحقوق محفوظة</p>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-2.5 rounded-full text-xs font-bold shadow-xl border border-slate-700 dark:border-slate-200 opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600"></i>
+        <span id="toastMsg">تم النسخ بنجاح!</span>
+    </div>
+
+    <!-- Collapsible Settings Panel (Bottom Bar) -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 border-t border-slate-200 dark:border-slate-800 glass-panel shadow-2xl transition-transform duration-300 translate-y-[calc(100%-44px)]" id="settingsPanel">
+        <!-- Panel Header Toggle -->
+        <button onclick="toggleSettings()" class="w-full h-11 flex items-center justify-center gap-2 text-slate-600 dark:text-slate-300 font-bold text-xs bg-slate-100/60 dark:bg-slate-800/60 border-b border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-200/60 dark:hover:bg-slate-700/60 transition">
+            <i class="fa-solid fa-sliders text-indigo-500"></i>
+            <span>لوحة تخصيص البيانات والروابط</span>
+            <i class="fa-solid fa-chevron-up transition-transform duration-300" id="panelArrow"></i>
+        </button>
+
+        <!-- Form Content -->
+        <div class="p-4 sm:p-5 max-w-xl mx-auto max-h-[70vh] overflow-y-auto space-y-4 text-right">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-bold mb-1 text-slate-600 dark:text-slate-300">الاسم / العنوان الرئيسي</label>
+                    <input type="text" id="inputName" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold mb-1 text-slate-600 dark:text-slate-300">الوصف المختصر</label>
+                    <input type="text" id="inputBio" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold mb-1 text-slate-600 dark:text-slate-300">رابط صورة البروفايل (URL)</label>
+                <input type="text" id="inputAvatar" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="https://example.com/photo.jpg">
+            </div>
+
+            <div class="border-t border-slate-200 dark:border-slate-800 pt-3 space-y-2.5">
+                <span class="block text-xs font-extrabold text-indigo-600 dark:text-indigo-400">تعديل الروابط:</span>
+                
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500">رابط الواتساب (مع كود الدولة مثل 2010...)</label>
+                    <input type="text" id="inputWhatsapp" class="w-full text-xs p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 dir-ltr text-left">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500">رابط صفحة الفيسبوك</label>
+                    <input type="text" id="inputFacebook" class="w-full text-xs p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 dir-ltr text-left">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500">رابط عنوان جوجل ماب</label>
+                    <input type="text" id="inputMaps" class="w-full text-xs p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 dir-ltr text-left">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500">رابط تقييمات جوجل (Google Reviews)</label>
+                    <input type="text" id="inputReviews" class="w-full text-xs p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 dir-ltr text-left">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500">عنوان إنستا باي (IPA / Phone / Account)</label>
+                    <input type="text" id="inputInstaPayAddress" class="w-full text-xs p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 dir-ltr text-left">
+                </div>
+            </div>
+
+            <div class="flex gap-2 pt-2">
+                <button onclick="saveSettings()" class="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold shadow transition">
+                    حفظ التغيرات
+                </button>
+                <button onclick="resetDefaultSettings()" class="px-4 py-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold transition">
+                    إعادة ضبط
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script>
+        // Data Store
+        const defaultData = {
+            name: "SAMEH GOUDA",
+            bio: "للأدوات الكهربائية - AVENA GROUP (وكيل معتمد)",
+            avatar: "Https://scontent.fcai20-4.fna.fbcdn.net/v/t39.30808-6/703111777_4263407227306689_4910447600149997489_n.jpg?stp=dst-jpg_tt6&cstp=mx900x896&ctp=s900x896&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHfnY8N2uRT33f5R3LcrvCBpzxzreXYwQOnPHOt5djBA8Gpth8gbehW4f34moTlxMJxgxPfc6OHe2jkOGn1nwA_&_nc_ohc=IE0PiW63o8QQ7kNvwF-ZGul&_nc_oc=Adq_khXNPRiVA5_UEzcmz7OPG9J5te4-9T_nPJa8TXfoicB0eKdT_k-ZQlOBB0w3otI&_nc_zt=23&_nc_ht=scontent.fcai20-4.fna&_nc_gid=fuUF-KjKvSP2C8-w2HMFfw&_nc_ss=7b2a8&oh=00_AQSaMmrMeiPbGlNMVUJhUyWTAPIlP1YdeSHxA7ORIvbpXw&oe=6AF77AAF",
+            whatsapp: "https://wa.me/201223726335",
+            facebook: "Https://www.facebook.com/share/1URMRcbrV1/",
+            maps: "Https://maps.app.goo.gl/APHKhGsbwsE22aeQ6",
+            reviews: "https://www.google.com/search?sca_esv=d7a5507144675b6b&sxsrf=AKL5yDj2KiqVp4DZNt2OMRGo9b9BKSf3Wg:1794227109263&q=%D8%AA%D8%B9%D9%8D%D9%8A%D9%82%D8%A7%D8%AA+%D8%AD%D9%88%D9%84+%D8%B4%D8%B1%D9%83%D8%A9+%D8%B3%D8%A7%D9%85%D8%AD+%D8%AC%D9%88%D8%AF%D8%A9+%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D8%A9+%D8%A7%D9%84%D8%A3%D8%AF%D9%88%D8%A7%D8%AA+%D8%A7%D9%84%D9%83%D9%87%D8%B1%D8%A8%D8%A7%D8%A6%D9%8A%D8%A9+%D9%88%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D8%B1%D8%A7%D8%AF+%D8%A8%D9%88%D8%B1+%D9%81%D8%A4%D8%A7%D8%AF",
+            google: "Https://share.google/PBrGUeCDg8XHCtifz",
+            instapayAddress: "01223726335@instapay"
+        };
+
+        let appData = { ...defaultData };
+
+        // Initialize App
+        window.onload = function() {
+            document.getElementById('currentYear').innerText = new Date().getFullYear();
+            loadSavedData();
+            setupTheme();
+        };
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function setupTheme() {
+            const isDark = localStorage.getItem('theme') === 'dark' || 
+                (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun text-amber-400';
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-moon text-slate-600';
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.className = 'fa-solid fa-moon text-slate-600';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun text-amber-400';
+            }
+        });
+
+        // Load Data to UI
+        function updateUI() {
+            document.getElementById('displayName').innerText = appData.name;
+            document.getElementById('displayBio').innerText = appData.bio;
+            if (appData.avatar) {
+                document.getElementById('displayAvatar').src = appData.avatar;
+            }
+            
+            document.getElementById('linkWhatsapp').href = appData.whatsapp.startsWith('http') ? appData.whatsapp : `https://wa.me/${appData.whatsapp}`;
+            document.getElementById('linkFacebook').href = appData.facebook;
+            document.getElementById('linkMaps').href = appData.maps;
+            document.getElementById('linkReviews').href = appData.reviews;
+            if(document.getElementById('linkGoogle')) document.getElementById('linkGoogle').href = appData.google || 'https://google.com';
+            
+            document.getElementById('instapayAddressText').innerText = appData.instapayAddress;
+            document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(appData.instapayAddress)}`;
+
+            // Populate Form Fields
+            document.getElementById('inputName').value = appData.name;
+            document.getElementById('inputBio').value = appData.bio;
+            document.getElementById('inputAvatar').value = appData.avatar;
+            document.getElementById('inputWhatsapp').value = appData.whatsapp;
+            document.getElementById('inputFacebook').value = appData.facebook;
+            document.getElementById('inputMaps').value = appData.maps;
+            document.getElementById('inputReviews').value = appData.reviews;
+            document.getElementById('inputInstaPayAddress').value = appData.inputInstaPayAddress || appData.instapayAddress;
+        }
+
+        function toggleInstaPayModal() {
+            const modal = document.getElementById('instapayModal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Save Data to LocalStorage
+        function saveSettings() {
+            appData.name = document.getElementById('inputName').value || defaultData.name;
+            appData.bio = document.getElementById('inputBio').value || defaultData.bio;
+            appData.avatar = document.getElementById('inputAvatar').value || defaultData.avatar;
+            appData.whatsapp = document.getElementById('inputWhatsapp').value || defaultData.whatsapp;
+            appData.facebook = document.getElementById('inputFacebook').value || defaultData.facebook;
+            appData.maps = document.getElementById('inputMaps').value || defaultData.maps;
+            appData.reviews = document.getElementById('inputReviews').value || defaultData.reviews;
+            appData.instapayAddress = document.getElementById('inputInstaPayAddress').value || defaultData.instapayAddress;
+
+            localStorage.setItem('bio_links_data', JSON.stringify(appData));
+            updateUI();
+            toggleSettings();
+            showToast('تم حفظ التعديلات بنجاح!');
+        }
+
+        function loadSavedData() {
+            const saved = localStorage.getItem('bio_links_data');
+            if (saved) {
+                try {
+                    appData = { ...defaultData, ...JSON.parse(saved) };
+                } catch(e) {
+                    appData = { ...defaultData };
+                }
+            }
+            updateUI();
+        }
+
+        function resetDefaultSettings() {
+            appData = { ...defaultData };
+            localStorage.removeItem('bio_links_data');
+            updateUI();
+            showToast('تمت إعادة البيانات الأصلية');
+        }
+
+        // Direct Copy URL Logic
+        function copyShareUrl() {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast('تم نسخ رابط الصفحة بنجاح!');
+                }).catch(() => {
+                    fallbackCopyShareUrl();
+                });
+            } else {
+                fallbackCopyShareUrl();
+            }
+        }
+
+        function fallbackCopyShareUrl() {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            showToast('تم نسخ رابط الصفحة بنجاح!');
+        }
+
+        // Copy InstaPay Address
+        function copyInstaPay() {
+            const textToCopy = appData.instapayAddress;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    onInstaPayCopied();
+                }).catch(() => {
+                    fallbackCopyText(textToCopy);
+                });
+            } else {
+                fallbackCopyText(textToCopy);
+            }
+        }
+
+        function fallbackCopyText(textToCopy) {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = textToCopy;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            onInstaPayCopied();
+        }
+
+        function onInstaPayCopied() {
+            const copyBtnText = document.getElementById('copyBtnText');
+            copyBtnText.innerText = 'تم النسخ!';
+            setTimeout(() => { copyBtnText.innerText = 'نسخ'; }, 2000);
+            showToast('تم نسخ حساب InstaPay بنجاح');
+        }
+
+        // Direct Phone Call Logic
+        function callDirectly() {
+            window.location.href = 'tel:01223726335';
+        }
+
+        // Toast Helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = message;
+            
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+
+        // Settings Panel Toggle
+        let isSettingsOpen = false;
+        function toggleSettings() {
+            const panel = document.getElementById('settingsPanel');
+            const arrow = document.getElementById('panelArrow');
+            isSettingsOpen = !isSettingsOpen;
+            
+            if (isSettingsOpen) {
+                panel.classList.remove('translate-y-[calc(100%-44px)]');
+                panel.classList.add('translate-y-0');
+                arrow.classList.add('rotate-180');
+            } else {
+                panel.classList.remove('translate-y-0');
+                panel.classList.add('translate-y-[calc(100%-44px)]');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</body>
+</html>
